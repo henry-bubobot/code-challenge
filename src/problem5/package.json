@@ -7,8 +7,8 @@
     "build": "tsc",
     "start": "node dist/app.js",
     "test": "jest --runInBand",
-    "migrate": "npx prisma migrate dev --name init",
-    "generate": "npx prisma generate",
+    "migrate": "pnpm prisma migrate dev --name init",
+    "generate": "pnpm prisma generate",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
   "dependencies": {

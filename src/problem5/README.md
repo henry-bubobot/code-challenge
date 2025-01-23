@@ -1,7 +1,3 @@
-<p align="center">
-  <a href="#" target="blank"><img src="./logo.svg" width="100" alt="Health Management Web Application" /></a>
-</p>
-
 <h1 align="center">Resource Management API</h1>
 
 # Introduction
@@ -9,19 +5,13 @@
 The Resource Management API is a RESTful API designed to manage resources in a system. It provides endpoints for creating, reading, updating, and deleting resources.
 
 # What I done?
-
-- [x] Setup source code with Clean Architecture
+- [x] Setup source code using ExpressJS (TypeScript)
 - [x] Setup Stylelint and Eslint for code quality
 - [x] Setup Prettier for code formatting
 - [x] Setup Jest for unit testing
 - [x] Setup Swagger for API documentation
-- [x] Setup husky for git hook
-- [x] Docker Compose setup for local development
-- [x] Database Design (PlanUML)
 - [x] Database Migration
-- [x] Authentication (JWT)
-- [x] Create User API
-- [x] Body Record API
+- [x] CRUD Resource APIs
 - [x] Unit Test
 
 # Output
@@ -35,72 +25,68 @@ The Resource Management API is a RESTful API designed to manage resources in a s
 The following is a typical folder structure for implementing Clean Architecture in a NestJS application:
 
 ```
-.
-├── + core
-│   ├── + base
-│   │   ├── - entity.ts
-│   │   ├── - mapper.ts
-│   │   ├── - repository.ts
-│   │   └── - use-case.ts
-│   │
-│   ├── + domain
-│   │   ├── + entities
-│   │   └── + mappers
-│   │
-│   └── + repositories
-│
-├── + infra
-│   ├── + data
-│   └── + framework
-│
-├── + shared
-│   └── + dtos
-│
-└── + use-cases
+problem5/
+├── prisma/
+│   ├── schema.prisma        # Database schema
+│   ├── migrations/          # Prisma migration files
+├── src/
+│   ├── controllers/
+│   │   └── resourceController.ts  # CRUD logic
+│   │   ├── __tests__/
+│   │   │   └── resourceController.test.ts    # Unit tests
+│   ├── middleware/
+│   │   ├── errorHandler.ts        # Global error handling
+│   │   ├── validateResource.ts    # Validation middleware
+│   ├── models/
+│   │   └── prismaClient.ts        # Prisma instance
+│   ├── routes/
+│   │   └── resourceRoutes.ts      # Express routes
+│   ├── swagger.ts                 # Swagger API documentation
+│   ├── types.ts                   # TypeScript types
+│   ├── constants.ts               # Constants
+│   ├── config.ts                  # Configuration
+│   ├── app.ts                      # Main Express server
+
+├── .env                            # Environment variables
+├── .gitignore                       # Ignore unnecessary files
+├── package.json                    # Dependencies and scripts
+├── tsconfig.json                    # TypeScript configuration
+├── README.md                        # Documentation
 ```
-
-- `core`: contains the business logic of the application, such as entities, use cases, and interfaces.
-
-- `infra`: contains the implementation of the interfaces defined in the core, such as data sources and services.
-
-- `shared`: contains code that can be shared between multiple modules, such as models and DTOs.
-
-- `use-cases`: contains the implementation of the use cases defined in the core, such as controllers and middleware.
-
 ## Installation
 
-### Setup Docker
-
-```bash
-cd docker
-docker compose up -d
-```
 
 ### Install dependencies
 
 ```bash
-$ yarn install
+$ pnpm install
 ```
-
-## Running the app
+### Setup .env file
 
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+$ cp .env.template .env
 ```
+
+### Migrate Prisma
+```bash
+$ pnpm migrate
+```
+
+## Run the app
+
+```bash
+# watch mode
+$ pnpm run dev
+```
+
+## URL
+- http://localhost:3000/api-docs # Swagger Documentation
+- http://localhost:3000 # Backend API
 
 ## Test
 
 ```bash
 # unit tests
-$ yarn run test
-
-# test coverage
-$ yarn run test:cov
+$ pnpm run test
 ```
+

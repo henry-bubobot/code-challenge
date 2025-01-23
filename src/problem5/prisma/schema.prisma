@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
+model Resource {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  status      Status   @default(ACTIVE)
+  priority    Int      @default(3) // Priority from 1 (Low) to 5 (High)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

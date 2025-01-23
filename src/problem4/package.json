@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@types/node": "^22.10.7"
+  },
+  "scripts": {
+    "test": "ts-node index.test.ts"
+  }
+}
